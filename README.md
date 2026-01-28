@@ -1,5 +1,5 @@
 # Building From Scratch
-
+![Building From Scratch](/assets/banner.png)
 This repo is a collection of How AI systems are built from core foundations to models, AI agents, AI IDEs, and emerging trends.
 
 > Abstractions hide complexity; building reveals it.
