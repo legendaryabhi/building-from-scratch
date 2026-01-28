@@ -249,9 +249,9 @@ How do you know if your agent is stuck in a loop or hallucinating?
 
 *(How AI becomes a real coding partner, not just autocomplete)*
 
-* **GitHub:**
-  * **Continue** [https://github.com/continuedev/continue](https://github.com/continuedev/continue) – Open-source AI IDE extension showing how context gathering, prompt construction, and model calls are wired together inside an editor.
-  * **Zed (AI features)** [https://github.com/zed-industries/zed](https://github.com/zed-industries/zed) – Modern open-source editor with collaborative + AI hooks; great reference for building AI-native editors.
+
+  * **GitHub:** [Continue](https://github.com/continuedev/continue) – Open-source AI IDE extension showing how context gathering, prompt construction, and model calls are wired together inside an editor.
+  * **GitHub:** [Zed (AI features)](https://github.com/zed-industries/zed) – Modern open-source editor with collaborative + AI hooks; great reference for building AI-native editors.
 * **Article:** [How AI Coding Assistants Work Under the Hood](https://blog.continue.dev/how-continue-works) – Explains prompt assembly, context windows, file selection, and tool calling in IDE copilots.
 * **YouTube:** [Building an AI Coding Assistant (from scratch concepts)](https://www.youtube.com/watch?v=NeT1zryaeDM) – Walkthrough of how copilots reason over code, not just generate text.
 * **Notebook / Example:** [Continue Prompt Templates](https://github.com/continuedev/continue/tree/main/prompts) – Real prompt “programs” used inside an IDE.
@@ -264,9 +264,9 @@ Copilots are *agents embedded into developer workflows* — understanding them t
 
 *(Turning natural language into structured agent programs)*
 
-* **GitHub:**
-  * [LangChain (Educational examples)](https://github.com/langchain-ai/langchain) – Focus on how prompts are chained, parsed, and executed (ignore the abstraction hype, read the internals).
-  * [Prompt Engineering Guide (Repo)](https://github.com/dair-ai/Prompt-Engineering-Guide) – Clear mental models for prompt structure, roles, constraints, and failure modes.
+
+  * **GitHub:**[LangChain (Educational examples)](https://github.com/langchain-ai/langchain) – Focus on how prompts are chained, parsed, and executed (ignore the abstraction hype, read the internals).
+  * **GitHub:**[Prompt Engineering Guide (Repo)](https://github.com/dair-ai/Prompt-Engineering-Guide) – Clear mental models for prompt structure, roles, constraints, and failure modes.
 * **Article:** [Prompts Are Programs](https://www.promptingguide.ai/techniques) – Treats prompts as executable logic, not text hacks.
 * **YouTube:** [Prompt Engineering for Agents (Deep Dive)](https://www.youtube.com/watch?v=dOxUroR57xs) – Shows how prompts evolve into planning + execution systems.
 * **Notebook:** [LangChain Agent Notebooks](https://github.com/langchain-ai/langchain/tree/master/docs/docs/modules/agents) – Minimal notebooks showing ReAct, tool-calling, and memory loops.
@@ -280,10 +280,10 @@ Agents don’t “chat” — they **execute prompt-compiled logic**. This is th
 
 *(Claude Cowork-like systems — but open source)*
 
-* **GitHub:**
-  * [AionUi](https://github.com/iOfficeAI/AionUi) – Open-source **Claude-Cowork alternative**: multi-agent sessions, local models, file access, task execution, and UI orchestration.
-  * [CrewBench](https://github.com/CrewBench/CrewBench) – Desktop control layer for AI coding agents; shows how agents are managed, logged, and replayed.
-  * [Eigent](https://github.com/eigent-ai/eigent) – Open-source local AI agent system with task execution and plugin-style actions.
+
+  * **GitHub:** [AionUi](https://github.com/iOfficeAI/AionUi) – Open-source **Claude-Cowork alternative**: multi-agent sessions, local models, file access, task execution, and UI orchestration.
+  * **GitHub:** [CrewBench](https://github.com/CrewBench/CrewBench) – Desktop control layer for AI coding agents; shows how agents are managed, logged, and replayed.
+  * **GitHub:** [Eigent](https://github.com/eigent-ai/eigent) – Open-source local AI agent system with task execution and plugin-style actions.
 * **Article:** [What Is an AI Cowork Environment?](https://aionui.com/docs/architecture) – Explains how cowork UIs coordinate agents, tools, memory, and humans.
 * **YouTube:** [Building AI Agent Dashboards](https://www.youtube.com/watch?v=H1pYtG5y7rM) – Visual overview of agent control panels and orchestration layers.
 * **Example Project:** [AionUi Demo Projects](https://github.com/iOfficeAI/AionUi/tree/main/examples) – Real examples of multi-agent workflows.
@@ -297,9 +297,9 @@ Cowork systems show **how agents are supervised, debugged, and composed**, which
 
 *(Where agents meet experimentation, data, and iteration)*
 
-* **GitHub:**
-  * [Jupyter AI](https://github.com/jupyterlab/jupyter-ai) – Open-source integration of LLMs into notebooks, showing how agents assist exploration.
-  * [AutoGen Studio](https://github.com/microsoft/autogen) – Multi-agent conversations + notebooks for debugging agent behavior step-by-step.
+
+* **GitHub:** [Jupyter AI](https://github.com/jupyterlab/jupyter-ai) – Open-source integration of LLMs into notebooks, showing how agents assist exploration.
+* **GitHub:** [AutoGen Studio](https://github.com/microsoft/autogen) – Multi-agent conversations + notebooks for debugging agent behavior step-by-step.
 * **Article:** [Agents in Notebooks: Why It Works](https://blog.jupyter.org/introducing-jupyter-ai-8d8a3d47b0c7) – Explains how notebooks become agent playgrounds.
 * **YouTube:** [Building Multi-Agent Systems in Jupyter](https://www.youtube.com/watch?v=V0Y6Q0zvF6g) – Hands-on agent orchestration with notebooks.
 * **Notebook:** [AutoGen Agent Examples](https://github.com/microsoft/autogen/tree/main/notebook) – Runnable notebooks showing agent roles, tools, and conversations. 
