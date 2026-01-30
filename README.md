@@ -333,4 +333,5 @@ We welcome contributions from the community. If you have a resource to add or a 
 
 ### License
 
-This repository is licensed under the [MIT License](LICENSE).
+This repository is licensed under the [MIT License](LICENSE).- **Microsoft AutoGen** – A multi-agent conversation framework that enables building complex AI applications with minimal effort. (https://microsoft.github.io/autogen/)
+- **CrewAI** – A framework for orchestrating role-playing autonomous AI agents to solve complex tasks. (https://github.com/joaomdmoura/crewai)
