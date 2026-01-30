@@ -1,3 +1,11 @@
+const fs = require("fs");
+
+const event = JSON.parse(
+  fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8")
+);
+
+const prNumber = event.pull_request.number;
+
 const axios = require("axios");
 const fetch = require("node-fetch");
 const { execSync } = require("child_process");
@@ -8,7 +16,7 @@ const MODEL = "gemini-1.5-flash";
 const LINK_TIMEOUT_MS = 8000;
 // ----------------------------
 
-const prNumber = process.env.GITHUB_REF.split("/")[2];
+
 
 // Collect Gemini keys
 const GEMINI_KEYS = Object.entries(process.env)
