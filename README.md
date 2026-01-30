@@ -333,4 +333,5 @@ We welcome contributions from the community. If you have a resource to add or a 
 
 ### License
 
-This repository is licensed under the [MIT License](LICENSE).
+This repository is licensed under the [MIT License](LICENSE).- **SWE-agent** – An open-source agent designed to autonomously resolve complex software issues by interacting with developer environments. (https://github.com/princeton-nlp/SWE-agent)
+- **Open Interpreter** – Empowers large language models to run code on your computer, providing a powerful local agent experience for various tasks. (https://github.com/OpenInterpreter/open-interpreter)
