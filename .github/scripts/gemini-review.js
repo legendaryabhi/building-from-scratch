@@ -109,7 +109,12 @@ Criteria:
 
 Score from 1–10.
 
-Return ONLY valid JSON:
+IMPORTANT:
+- Respond with JSON ONLY
+- No markdown
+- No explanation outside JSON
+
+JSON format:
 {
   "overall_score": number,
   "decision": "merge" | "needs_changes" | "reject",
@@ -127,9 +132,23 @@ ${diff}
     }
   );
 
-  const text = res.data.candidates[0].content.parts[0].text;
-  return JSON.parse(text);
+  const rawText =
+    res.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+  if (!rawText) {
+    throw new Error("Empty Gemini response");
+  }
+
+  // ✅ Extract JSON safely (handles markdown / extra text)
+  const match = rawText.match(/\{[\s\S]*\}/);
+
+  if (!match) {
+    throw new Error("No JSON found in Gemini response");
+  }
+
+  return JSON.parse(match[0]);
 }
+
 
 // ---------- EXECUTION ----------
 (async () => {
@@ -144,7 +163,16 @@ ${diff}
     } else {
       closePR(`❌ **Rejected**\n\n${result.reason}`);
     }
-  } catch (e) {
-    closePR("❌ Review failed (Gemini error or invalid JSON).");
-  }
+} catch (e) {
+  console.error("Gemini failure:", e.message);
+
+  comment(
+    "**AI Review Temporarily Failed**\n\n" +
+    "This can happen due to model instability.\n" +
+    "A maintainer can re-run the workflow."
+  );
+
+  process.exit(0); // keep workflow green
+}
+
 })();
