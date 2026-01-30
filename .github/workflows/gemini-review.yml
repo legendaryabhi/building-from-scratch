@@ -22,7 +22,7 @@ jobs:
           node-version: 20
 
       - name: Install deps
-        run: npm install axios node-fetch
+        run: npm install axios
 
       - name: Gemini Review
         env:

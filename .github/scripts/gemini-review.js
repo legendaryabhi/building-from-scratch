@@ -1,23 +1,19 @@
 const fs = require("fs");
+const axios = require("axios");
+const { execSync } = require("child_process");
 
+// ---------- PR CONTEXT ----------
 const event = JSON.parse(
   fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8")
 );
 
 const prNumber = event.pull_request.number;
 
-const axios = require("axios");
-const fetch = require("node-fetch");
-const { execSync } = require("child_process");
-
 // ---------- CONFIG ----------
 const SCORE_TO_MERGE = 8;
-const MODEL = "gemini-1.5-flash";
-const LINK_TIMEOUT_MS = 8000;
+const MODEL = "gemini-2.5-flash";
 
-
-
-// Collect Gemini keys
+// ---------- GEMINI KEYS ----------
 const GEMINI_KEYS = Object.entries(process.env)
   .filter(([k]) => k.startsWith("GEMINI_API_KEY"))
   .map(([, v]) => v)
@@ -32,6 +28,7 @@ function pickKey() {
   return GEMINI_KEYS[Math.floor(Math.random() * GEMINI_KEYS.length)];
 }
 
+// ---------- HELPERS ----------
 function run(cmd) {
   return execSync(cmd, { encoding: "utf8" }).trim();
 }
@@ -41,8 +38,9 @@ function comment(body) {
 }
 
 function closePR(reason) {
+  console.log("PR rejected:", reason);
   run(`gh pr close ${prNumber} --comment "${reason}"`);
-  process.exit(1);
+  process.exit(0); // important: workflow success
 }
 
 function mergePR() {
@@ -62,29 +60,27 @@ if (!(files.length === 1 && files[0] === "README.md")) {
 
 // Get diff
 const diff = run(`gh pr diff ${prNumber}`);
+
 if (diff.length < 100) {
-  closePR("❌ Change is too small or meaningless.");
+  closePR("❌ Change is too small or low-signal.");
 }
 
-// ---------- LINK EXTRACTION ----------
+// ---------- DUPLICATE LINK CHECK (TEXT ONLY) ----------
 
-// Extract added lines only
+// Extract added lines
 const addedLines = diff
   .split("\n")
   .filter(l => l.startsWith("+") && !l.startsWith("+++"))
   .join("\n");
 
-// Extract URLs
 const urlRegex = /(https?:\/\/[^\s)>\]]+)/g;
 const newLinks = [...new Set(addedLines.match(urlRegex) || [])];
 
 if (newLinks.length === 0) {
-  closePR("❌ No valid links added.");
+  closePR("❌ No new links added in README.");
 }
 
-// ---------- DUPLICATE CHECK ----------
-
-// Get current README (main branch)
+// Existing README from main
 const baseReadme = run(`git show origin/main:README.md`);
 const existingLinks = new Set(baseReadme.match(urlRegex) || []);
 
@@ -95,57 +91,7 @@ if (duplicates.length > 0) {
   );
 }
 
-// ---------- LINK HEALTH CHECK ----------
-
-async function checkLink(url) {
-  try {
-    const controller = new AbortController();
-    setTimeout(() => controller.abort(), LINK_TIMEOUT_MS);
-
-    // GitHub blocks HEAD — use GET directly
-    const method = url.includes("github.com") ? "GET" : "HEAD";
-
-    let res = await fetch(url, {
-      method,
-      redirect: "follow",
-      signal: controller.signal
-    });
-
-    // If HEAD failed, fallback to GET
-    if (res.status >= 400 && method === "HEAD") {
-      res = await fetch(url, {
-        method: "GET",
-        redirect: "follow",
-        signal: controller.signal
-      });
-    }
-
-    return res.status >= 200 && res.status < 400;
-  } catch {
-    return false;
-  }
-}
-
-
-async function validateLinks() {
-  const results = await Promise.all(
-    newLinks.map(async link => ({
-      link,
-      ok: await checkLink(link)
-    }))
-  );
-
-  const dead = results.filter(r => !r.ok).map(r => r.link);
-
-  if (dead.length > 0) {
-    closePR(
-      `❌ Dead or unreachable link(s):\n\n${dead.join("\n")}`
-    );
-  }
-}
-
 // ---------- GEMINI REVIEW ----------
-
 async function geminiReview() {
   const apiKey = pickKey();
 
@@ -159,9 +105,9 @@ Criteria:
 2. Technically correct
 3. Not hype or marketing
 4. Useful for developers
-5. High-signal resource
+5. High-signal contribution
 
-Score 1–10.
+Score from 1–10.
 
 Return ONLY valid JSON:
 {
@@ -186,22 +132,19 @@ ${diff}
 }
 
 // ---------- EXECUTION ----------
-
 (async () => {
   try {
-    await validateLinks();
-
     const result = await geminiReview();
 
     if (result.decision === "merge" && result.overall_score >= SCORE_TO_MERGE) {
       comment(`✅ **Gemini Approved**\n\n${result.reason}`);
       mergePR();
     } else if (result.decision === "needs_changes") {
-      comment(`🟡 **Changes Needed**\n\n${result.reason}`);
+      comment(`🟡 **Changes Requested**\n\n${result.reason}`);
     } else {
       closePR(`❌ **Rejected**\n\n${result.reason}`);
     }
   } catch (e) {
-    closePR("❌ Review failed (invalid response or network issue).");
+    closePR("❌ Review failed (Gemini error or invalid JSON).");
   }
 })();
