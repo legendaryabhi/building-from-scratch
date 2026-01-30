@@ -333,4 +333,5 @@ We welcome contributions from the community. If you have a resource to add or a 
 
 ### License
 
-This repository is licensed under the [MIT License](LICENSE).
+This repository is licensed under the [MIT License](LICENSE).- **CrewAI** – A framework for orchestrating role-playing autonomous AI agents, enabling complex task execution through collaborative intelligence. (https://www.crewai.com/)
+- **OpenDevin** – An open-source attempt to replicate and extend Devin, focusing on autonomous software engineering agents capable of tackling development tasks end-to-end. (https://github.com/OpenDevin/OpenDevin)
