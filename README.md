@@ -306,14 +306,16 @@ Notebooks are the **lab bench for agents** — perfect for inspecting reasoning,
 
 ### Emerging Trends
 
-#### **1. Clawdbot (The "Life OS" Agent)**
+#### **1. OpenClaw (The "Life OS" Agent)**
 
-*Concept:* Clawdbot (often stylized with the lobster emoji) is a proactive, local-first AI assistant. Unlike typical bots that wait for you to prompt them, Clawdbot runs 24/7 on your hardware and messages you first via WhatsApp, Telegram, or Discord.
+*Concept:* OpenClaw (often stylized with the lobster emoji) is a proactive, local-first AI assistant. Unlike typical bots that wait for you to prompt them, Clawdbot runs 24/7 on your hardware and messages you first via WhatsApp, Telegram, or Discord.
 
-* **GitHub:** [clawdbot/clawdbot](https://github.com/clawdbot/clawdbot) – The official repository. A "Claude with hands" that manages your email, calendar, and system files.
-* **Article:** [Clawdbot: The AI Assistant that Messages You First](https://jpcaparas.medium.com/what-are-people-doing-with-clawdbot-e91403383ccf) – A deep dive into real-world use cases like travel planning, server monitoring, and automated daily briefings.
-* **Documentation:** [Clawdbot Docs](https://docs.clawd.bot) – Detailed guides on setting up "Skills," connecting "Gateways" (messaging apps), and securing your local execution environment.
-* **YouTube:** [Clawdbot: The 24/7 Jarvis Assistant](https://www.google.com/search?q=https://www.youtube.com/watch%3Fv%3D1qmrkdu) – A visual setup guide showing how to turn a Mac Mini or Raspberry Pi into a persistent "Personal AI Employee."
+* **GitHub:** [openclaw/openclaw](https://github.com/openclaw/openclaw) – The official repository. A "Claude with hands" that manages your email, calendar, and system files.
+* Visit Site [here](https://openclaw.ai)
+* [Documentation](https://docs.openclaw.ai/start/getting-started)
+
+[NanoBot](https://www.nanobot.ai) - An Open Source framework for building MCP agents—complete with reasoning, system prompts, tool orchestration, and rich MCP-UI support.
+
 
 ### Contributing
 
